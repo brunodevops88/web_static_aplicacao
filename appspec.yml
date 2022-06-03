@@ -3,8 +3,4 @@ os: linux
 files:
   - source: /web/*
     destination: /usr/share/nginx/html
-hooks:
-  BeforeInstall:
-    - location: /stop-server
-      timeout: 30
-      runas: root
+
