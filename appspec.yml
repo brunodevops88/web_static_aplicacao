@@ -4,7 +4,8 @@ files:
   - source: /
     destination: /var/www/html/
 hooks:
+  hooks:
   BeforeInstall:
-    - location: stop_server
+    - location: stop-server.sh
       timeout: 30
       runas: root
