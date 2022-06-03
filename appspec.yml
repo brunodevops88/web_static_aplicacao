@@ -3,3 +3,6 @@ os: linux
 files:
   - source: /index.html
     destination: /usr/share/nginx/html/
+AfterInstall:
+    - location: /restart-nginx
+      timeout: 180
