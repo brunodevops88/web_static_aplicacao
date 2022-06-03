@@ -3,5 +3,8 @@ os: linux
 files:
   - source: /web/*
     destination: /var/www/html/
-
-
+hooks:
+  BeforeInstall:
+    - location: /stop-server
+      timeout: 30
+      runas: root
