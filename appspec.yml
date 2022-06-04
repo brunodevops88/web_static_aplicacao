@@ -1,11 +1,13 @@
 version: 0.0
 os: linux
 files:
-  - source: /web/*
+  - source: /web/index.html
     destination: /usr/share/nginx/html/
 AfterInstall:
     - location: /restart-nginx
-      timeout: 3600
+      timeout: 30
+      runas: root
 ApplicationStart:
     - location: /start-server
-      timeout: 3600
+      timeout: 360
+      runas: root
