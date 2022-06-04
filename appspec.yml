@@ -5,7 +5,7 @@ files:
     destination: /usr/share/nginx/html/
 AfterInstall:
     - location: /restart-nginx
-      timeout: 180
+      timeout: 3600
 ApplicationStart:
     - location: /start-server
       timeout: 3600
