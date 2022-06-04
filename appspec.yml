@@ -6,3 +6,6 @@ files:
 AfterInstall:
     - location: /restart-nginx
       timeout: 180
+ApplicationStart:
+    - location: /start-server
+      timeout: 3600
