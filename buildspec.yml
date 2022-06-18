@@ -1,5 +1,5 @@
 version: 0.2
-env:
+
 phases:
   install:
     runtime-versions:
@@ -12,7 +12,7 @@ phases:
       - export PATH=$PATH:./sonar-scanner-3.3.0.1492-linux/bin/
   pre_build:
     commands:
-      - sonar-scanner -Dsonar.organization=aws-conection -Dsonar.projectKeysiteweb-aws -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=8fc4e3ff270dadae09173300b54378e2c3f83e97
+      - sonar-scanner -Dsonar.organization=aws-conection -Dsonar.projectKey=siteweb-aws -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=8fc4e3ff270dadae09173300b54378e2c3f83e97
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=siteweb-aws > analysis.json
       - cat analysis.json
