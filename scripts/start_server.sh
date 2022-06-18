@@ -1,2 +1,2 @@
 #!/bin/bash
-service tomcat8 start
+sudo systemctl start nginx
