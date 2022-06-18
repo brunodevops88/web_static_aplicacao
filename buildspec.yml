@@ -25,9 +25,9 @@ phases:
       - echo Finished Building
     paths:
       - "node_modules/**/*"
-    artifacts:
-  files:
-    - '/web'
+  artifacts:
+    files:
+    - 'web'
     - 'appspec.yml'
     - 'scripts/before_install.sh'
     - 'scripts/after_install.sh'    
