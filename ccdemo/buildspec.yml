@@ -3,8 +3,8 @@ env:
   secrets-manager:
     LOGIN: prod/sonarbuild:Sonatoken
     HOST: prod/sonarbuild:Host
-    Organizaçao: prod/sonarbuild:Organizaçao
-    Projeto: prod/sonarbuild:Projeto
+    Organization: prod/sonarbuild:Organizaçao
+    Project: prod/sonarbuild:Projeto
 phases:
   install:
     runtime-versions:
@@ -24,7 +24,7 @@ phases:
        build:
     commands:
       - mvn test     
-      - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Projeto -Dsonar.organization=$Organizaçao
+      - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Projeto -Dsonar.organization=$Organization
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
