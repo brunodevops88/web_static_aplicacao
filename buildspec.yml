@@ -20,19 +20,10 @@ phases:
     commands:
       - echo Building Project
       - echo Finished Building
-  post_build:
-    commands:
-      - echo Build completed on `date`
+
   cache:
   paths:
     - "node_modules/**/*"
-artifacts:
-  files:
-    - '/web/.'
-    - 'appspec.yml'
-    - 'scripts/before_install.sh'
-    - 'scripts/after_install.sh'    
-    - 'scripts/start_server.sh'
-    - 'scripts/stop_server.sh'  
+
 
     
