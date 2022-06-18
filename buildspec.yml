@@ -15,8 +15,13 @@ phases:
       - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/  
   build:
     commands:
-      - echo Build started on `date`
-      - mvn install
+      - mvn test     
+       - sonar-scanner -Dsonar.organization=aws-conection -Dsonar.projectKey=siteweb-aws -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=ce4a52f771a90dd2d3906f3b9fd3d574c1908c33
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$PROJECTKEY > analysis.json
+      - cat analysis.json
+      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+
   post_build:
     commands:
       - echo Build completed on `date`
