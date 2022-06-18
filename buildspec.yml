@@ -7,12 +7,15 @@ phases:
     commands:
       - apt-get update
       - apt-get install -y jq
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
-      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
-      - export PATH=$PATH:./sonar-scanner-3.3.0.1492-linux/bin/
+      - export SONAR_SCANNER_VERSION=4.7.0.2747
+      - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+      - curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
+      - unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+      - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+      - export SONAR_SCANNER_OPTS="-server"
   pre_build:
     commands:
-      - sonar-scanner -Dsonar.organization=aws-conection -Dsonar.projectKey=siteweb-aws -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=############
+      - sonar-scanner -Dsonar.organization=aws-conection  -Dsonar.projectKey=siteweb-aws -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=cbeb46417c9f2a7c100932e2820e40a635eae7dd
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=siteweb-aws > analysis.json
       - cat analysis.json
@@ -22,6 +25,3 @@ phases:
       - echo Finished Building
     paths:
       - "node_modules/**/*"
-
-
-    
