@@ -33,6 +33,3 @@ phases:
     - 'scripts/after_install.sh'    
     - 'scripts/start_server.sh'
     - 'scripts/stop_server.sh'
-
-  paths:
-    - "node_modules/**/*"
