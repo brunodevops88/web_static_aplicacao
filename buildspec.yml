@@ -27,7 +27,7 @@ phases:
       - "node_modules/**/*"
     artifacts:
   files:
-    - 'web/index.html'
+    - '/web'
     - 'appspec.yml'
     - 'scripts/before_install.sh'
     - 'scripts/after_install.sh'    
