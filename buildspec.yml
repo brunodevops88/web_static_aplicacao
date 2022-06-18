@@ -20,10 +20,8 @@ phases:
     commands:
       - echo Building Project
       - echo Finished Building
-
-  cache:
-  paths:
-    - "node_modules/**/*"
+    paths:
+      - "node_modules/**/*"
 
 
     
