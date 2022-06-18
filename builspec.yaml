@@ -8,7 +8,7 @@ env:
 phases:
   install:
     runtime-versions:
-      apache: java
+        java: openjdk8
   pre_build:
     commands:
       - apt-get update
