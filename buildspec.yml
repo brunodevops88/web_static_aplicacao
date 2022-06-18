@@ -1,4 +1,10 @@
 version: 0.2
+env:
+  secrets-manager:
+    LOGIN: prod/sonarbuild:Sonatoken
+    HOST: prod/sonarbuild:Host
+    Organization: prod/sonarbuild:Organizaçao
+    Project: prod/sonarbuild:Projeto
 phases:
   install:
     runtime-versions:
@@ -16,12 +22,11 @@ phases:
   build:
     commands:
       - mvn test     
-       - sonar-scanner -Dsonar.organization=aws-conection -Dsonar.projectKey=siteweb-aws -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=ce4a52f771a90dd2d3906f3b9fd3d574c1908c33
+      - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$PROJECTKEY > analysis.json
-      - cat analysis.json
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
+      - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
-
   post_build:
     commands:
       - echo Build completed on `date`
