@@ -15,7 +15,7 @@ phases:
       - export SONAR_SCANNER_OPTS="-server"
   pre_build:
     commands:
-      - sonar-scanner -Dsonar.organization=brunosantos88 -Dsonar.projectKey=SITEWEB -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=70bcf2f709e23973e9fd90f23fbc50bd31775810
+      - sonar-scanner -Dsonar.organization=brunosantos88 -Dsonar.projectKey=SITEWEB -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=***************
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=SITEWEB > analysis.json
       - cat analysis.json
   build:
