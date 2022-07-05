@@ -1,5 +1,7 @@
 version: 0.2
-
+env:
+  secrets-manager:
+   TOKEN: firstSecret:tokenForSonar
 phases:
   install:
     runtime-versions:
@@ -15,7 +17,7 @@ phases:
       - export SONAR_SCANNER_OPTS="-server"
   pre_build:
     commands:
-      - sonar-scanner -Dsonar.organization=brunosantos88 -Dsonar.projectKey=SITEWEB -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=***************
+      - sonar-scanner -Dsonar.organization=brunosantos88 -Dsonar.projectKey=SITEWEB -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$TOKEN 
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=SITEWEB > analysis.json
       - cat analysis.json
   build:
