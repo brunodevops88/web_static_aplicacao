@@ -34,11 +34,6 @@ phases:
       - sonar-scanner -Dsonar.organization=sonar88 -Dsonar.projectKey=sonarcloud88 -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$LOGIN
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=SITEWEB > analysis.json
       - cat analysis.json
-
-      - sleep 5
-     - |- 
-        quality_status=$(curl -s -u $TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=sonarcloud88 | jq -r '.projectStatus.status')
-        echo "SonarCloud analysistatus is $quality_status"; 
   build:
     commands:
       - echo Building Project
