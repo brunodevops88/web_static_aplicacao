@@ -40,6 +40,6 @@ phases:
       - echo Finished Building
     paths:
       - "node_modules/**/*"
-  artifacts:
-    files:
+artifacts:
+  files:
       - zap_report.html
