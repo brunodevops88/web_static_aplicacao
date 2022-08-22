@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: web/*
+  - source: web/.
     destination: /usr/share/nginx/html/
 hooks:
   BeforeInstall:
@@ -16,4 +16,4 @@ hooks:
     - location: scripts/start_server.sh
       timeout: 60
       runas: root
-
+  
