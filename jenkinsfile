@@ -1,9 +1,24 @@
-Jenkinsfile (Declarative Pipeline)
 pipeline {
-    agent any 
-    stages {
-        stage('Build') { 
-            steps {
-                // 
-            }
-        }
+  agent any
+    
+  stages {    
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/BrunoSantos88/SITEWEB.git'
+    }
+    }
+        
+    stage('Install dependencies') {
+      steps {
+        sh 'npm install'
+        sh 'npm run bowerInstall'
+      }
+    }
+     
+    stage('Test') {
+      steps {
+         sh 'npm test'
+      }
+    }      
+  }
+}
