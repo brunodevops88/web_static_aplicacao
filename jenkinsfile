@@ -3,14 +3,18 @@ pipeline {
      stages {
         stage("Build") {
             steps {
-      sh "apt-get update"
-      sh "apt-get install -y jq"
-      sh "export SONAR_SCANNER_VERSION=4.7.0.2747"
-      sh "export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux"
-      sh "curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip"
-      sh "unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/"
-      sh "export PATH=$SONAR_SCANNER_HOME/bin:$PATH"
-      sh "export SONAR_SCANNER_OPTS="-server"
+    
+ stage('Install dependencies') {
+      steps {
+        sh 'npm install'
       
-            }
-        }
+      }
+    }
+     
+    stage('Test') {
+      steps {
+         sh 'npm test'
+      }
+    }      
+  }
+}
