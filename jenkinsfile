@@ -1,24 +1,17 @@
 pipeline {
-  agent any
-    
-  stages {    
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/BrunoSantos88/SITEWEB.git'
+     agent any
+     stages {
+        stage("Build") {
+            steps {
+                sh "sudo npm install"
+                sh "sudo npm run build"
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sh "sudo rm -rf /usr/share/nginx/html/*"
+                sh "sudo cp  web/. /usr/share/nginx/html/"
+            }
+        }
     }
-    }
-        
-    stage('Install dependencies') {
-      steps {
-        sh 'npm install'
-        sh 'npm run bowerInstall'
-      }
-    }
-     
-    stage('Test') {
-      steps {
-         sh 'npm test'
-      }
-    }      
-  }
 }
