@@ -1,20 +1,23 @@
-version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16
+      nodejs: 12
     commands:
-      - echo Nothing to do in the install phase...
+      - apt-get update
+      - apt-get install -y jq
+      - apt-get -y install wget
+      - apt-get -y install default-jdk
+      - wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2.11.1_Linux.tar.gz
+      - mkdir zap
+      - tar -xvf ZAP_2.11.1_Linux.tar.gz
+      - cd ZAP_2.11.1
+      - ./zap.sh -cmd -quickurl https://www.example.com -quickprogress -quickout ../zap_report.html  
   pre_build:
     commands:
-      - node --version
+       - echo Nothing to do in the pre_build phase...
   build:
     commands:
-      - npm init
-  post_build:
-    commands:
-      - echo Build completed on `date`
-
-  artifacts:
-    files:
-    - target/web
+     - echo Build started on `date`
+     - mvn install
+    paths:
+      - "node_modules/**/*"
