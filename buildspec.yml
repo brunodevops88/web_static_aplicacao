@@ -10,7 +10,6 @@ phases:
       - node --version
   build:
     commands:
-      - npm install
       - npm init
   post_build:
     commands:
@@ -19,8 +18,3 @@ phases:
   artifacts:
     files:
     - target/web
-    - 'appspec.yml'
-    - 'scripts/before_install.sh'
-    - 'scripts/after_install.sh'    
-    - 'scripts/start_server.sh'
-    - 'scripts/stop_server.sh'
