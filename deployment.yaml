@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asgbuggy-deployment
+  spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Frontend
+    metadata:
+      labels:
+        app: Frontend
+      containers:
+      - name: frontend
+        image: brunosantos88/webfrontend:2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: Frontend
+    k8s-app: Frontend
+  name: Frontend
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  type: LoadBalancer
+  selector:
+    app: asgbuggy

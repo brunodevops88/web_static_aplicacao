@@ -33,5 +33,14 @@ checkout scm
         }
       }
     }
+
+    stage('Kubernetes Deployment aplicação venda') {
+	   steps {
+	      withKubeConfig([credentialsId: 'kubelogin']) {
+		  sh ('kubectl apply -f deployment.yaml --namespace=devops')
+		}
+	      }
+   	}
+
    }
 }
