@@ -10,6 +10,7 @@ phases:
       - node --version
   build:
     commands:
+      - npm install
       - npm init
   post_build:
     commands:
