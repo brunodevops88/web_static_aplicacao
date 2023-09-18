@@ -10,7 +10,7 @@ phases:
       - node --version
   build:
     commands:
-      - npm start
+      - npm init
   post_build:
     commands:
       - echo Build completed on `date`
