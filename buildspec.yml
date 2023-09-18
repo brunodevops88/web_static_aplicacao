@@ -11,4 +11,4 @@ phases:
     commands:
      - node init
     paths:
-      - "web/*"
+      - "node_modules/**/*"
