@@ -1,6 +1,11 @@
 pipeline {
   agent any
+
+  tools { 
+    ///depentencias 
+   // terraform 'Terraform 1.3.7' 
 }
+ 
     environment {
     GCLOUD_CREDS=credentials('gcloud-creds')
     PROJECT_ID=('ProjectID')
@@ -44,3 +49,4 @@ stage('GIT CLONE') {
             }
         }
     }
+}
