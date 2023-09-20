@@ -12,7 +12,7 @@ pipeline {
   }
 
 
-  stages{
+stages{
 
 stage('GIT CLONE') {
   steps {
@@ -42,12 +42,5 @@ stage('GIT CLONE') {
                     sh "docker push ${ARTIFACT_REGISTRY_IMAGE}"
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            // Clean up: Remove the locally built image
-            sh "docker rmi ${ARTIFACT_REGISTRY_IMAGE}"
         }
     }
