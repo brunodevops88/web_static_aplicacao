@@ -1,9 +1,5 @@
 pipeline {
   agent any
-
-  tools { 
-    ///depentencias 
-   // terraform 'Terraform 1.3.7' 
 }
  
     environment {
@@ -11,9 +7,7 @@ pipeline {
     PROJECT_ID=('ProjectID')
     REGISTRY_REGION = 'us-central1'  // Substitua pela região desejada
     IMAGE_NAME = 'Frontend'
-    IMAGE_TAG = 'Frontend'
-    ARTIFACT_REGISTRY = "gcr.io/${PROJECT_ID}"
-    ARTIFACT_REGISTRY_IMAGE = "${ARTIFACT_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+
   }
 
 
@@ -49,4 +43,3 @@ stage('GIT CLONE') {
             }
         }
     }
-}
