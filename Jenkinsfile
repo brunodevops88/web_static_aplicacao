@@ -1,9 +1,5 @@
 pipeline {
   agent any
-
-  tools { 
-    ///depentencias 
-    //terraform 'Terraform 1.3.7' 
 }
     environment {
     GCLOUD_CREDS=credentials('gcloud-creds')
@@ -55,4 +51,3 @@ stage('GIT CLONE') {
             sh "docker rmi ${ARTIFACT_REGISTRY_IMAGE}"
         }
     }
-}
