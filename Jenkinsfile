@@ -1,31 +1,27 @@
-pipeline {
-    agent any
-    
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout your source code from your Git repository
-                checkout scm
-            }
-        }
-        
-        stage('Deploy to Google Cloud Storage') {
-            steps {
-                script {
-                    // Authenticate with Google Cloud using a service account key (JSON key file)
-                    withCredentials([file(credentialsId: 'google-cloud-key', variable: 'GCLOUD_KEY')]) {
-                        sh 'echo $GCLOUD_KEY > gcloud-key.json'
-                        sh 'gcloud auth activate-service-account --key-file=gcloud-key.json'
-                        
-                        // Set your Google Cloud project
-                        sh 'gcloud config set project devops-399217'
-                        
-                        // Deploy your static website to Google Cloud Storage
-                        sh 'gsutil -m rsync -r ./path/to/your/static/website gs://mybuket131646485/'
-                    }
-                }
-            }
-        }
+pipeline{
+    agent any 
+    environment {
+    AWS_DEFAULT_REGION = "us-east-1"
+    THE_BUTLER_SAYS_SO = credentials('awscredential')
     }
-    
+    stages {
+        stage ('Build'){
+            steps {
+                echo "Building stage"
+            }
+        }
+        stage ('Test'){
+            steps {
+                echo "Testing stage"
+
+            }
+        }
+        stage ('Deploy to S3'){ 
+            steps{ 
+                echo "Deploying" 
+                sh ' aws s3 cp ./web s3://mybuckets3jenkins '
+            } 
+        }
+
+    }
 }
