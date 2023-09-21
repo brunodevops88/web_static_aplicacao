@@ -21,8 +21,7 @@ pipeline {
                         sh 'gcloud config set project devops-399217'
                         
                         // Deploy your static website to Google Cloud Storage
-                        sh 'gsutil -m rsync -r ./path/to/your/static/website gs://mybuket131646485/
-/'
+                        sh 'gsutil -m rsync -r ./path/to/your/static/website gs://mybuket131646485/'
                     }
                 }
             }
