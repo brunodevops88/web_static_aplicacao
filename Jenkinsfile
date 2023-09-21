@@ -9,13 +9,13 @@ pipeline {
 
   stages{
 
-    stage('Clone repository') { 
-steps { 
-script{
-checkout scm
-}
-}
-}
+stage('GIT CLONE') {
+  steps {
+                // Get code from a GitHub repository
+    git url: 'https://github.com/BrunoSantos88/SITEWEB.git', branch: 'main',
+    credentialsId: 'jenkins-server_local'
+          }
+  }
   
     stage('Building image') {
       steps{
