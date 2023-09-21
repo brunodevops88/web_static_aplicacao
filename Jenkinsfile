@@ -38,11 +38,13 @@ stage('GIT CLONE') {
       }
     }
      
-
-    stage('Deploy to GKE') {
-            steps{
-                sh "kubectl apply -f deployment.yaml"
-            }
+stage('Deploying Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deployment.yaml")
         }
+      }
+    }
+
     }
    }
