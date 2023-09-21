@@ -33,7 +33,9 @@ stage('GIT CLONE') {
         }
       }
     }
-
+     
+     
+     //kube#
     stage('Kubernetes Deployment Frontend') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
