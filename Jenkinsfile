@@ -16,12 +16,16 @@ pipeline{
 
             }
         }
-        stage ('Deploy to S3'){ 
-            steps{ 
-                echo "Deploying" 
-                sh ' aws s3 cp ./ s3://mybuckets3jenkins '
-            } 
+  stage('Deploy to S3') {
+            steps {
+                script {
+                    def bucketName = 'mybuckets3jenkins'
+                    def sourceDir = '*'
+                    
+                    // Use the AWS CLI to sync the files to S3
+                    sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
+                }
+            }
         }
-
     }
 }
