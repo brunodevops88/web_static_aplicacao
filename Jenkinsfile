@@ -1,8 +1,12 @@
-pipeline{
-    agent any 
+pipeline {
+    agent any
+
     environment {
-    AWS_DEFAULT_REGION = "us-east-1"
-    THE_BUTLER_SAYS_SO = credentials('awscredential')
+        AWS_ACCESS_KEY_ID = credentials('CredentialID')
+        AWS_SECRET_ACCESS_KEY = credentials('SecretAccessKey')
+        AWS_DEFAULT_REGION = 'us-east-1'
+
+
     }
     stages {
         stage ('Build'){
