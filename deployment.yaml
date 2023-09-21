@@ -1,36 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Frontend
+name: hello
+labels:
+  app: hello
+spec:
+strategy:
+  type: Recreate
+template:
+  metadata:
+    labels:
+      app: hello
+      tier: hello
   spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: Frontend
-    metadata:
-      labels:
-        app: Frontend
-      containers:
-      - name: frontend
-        image: brunosantos88/webfrontend:5
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-# service type loadbalancer       
+    containers:
+    - name: hello
+      image: brunosantos88/webfrontend:latest
+      imagePullPolicy: Always
+      ports:
+      - containerPort: 80
+        name: hello
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: Frontend
-    k8s-app: Frontend
-  name: Frontend
+name: hello
+labels:
+  app: hello
 spec:
-  ports:
-  - name: http
-    port: 80
-    protocol: TCP
+ports:
+  - port: 80
     targetPort: 80
-  type: LoadBalancer
-  selector:
-    app: asgbuggy
+selector:
+  app: hello
+  tier: hello
+type: LoadBalancer
