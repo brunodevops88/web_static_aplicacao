@@ -34,9 +34,10 @@ stage('GIT CLONE') {
       }
     }
 
-    stage('Kubernetes Deployment aplicação venda') {
+    stage('Kubernetes Deployment Frontend') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
+      sh ('kubectl create namespace devops')
 		  sh ('kubectl apply -f deployment.yaml --namespace=devops')
 		}
 	      }

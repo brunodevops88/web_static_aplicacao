@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: asgbuggy-deployment
+  name: Frontend
   spec:
   replicas: 1
   selector:
@@ -12,7 +12,7 @@ metadata:
         app: Frontend
       containers:
       - name: frontend
-        image: brunosantos88/webfrontend:2
+        image: brunosantos88/webfrontend:5
         imagePullPolicy: Always
         ports:
         - containerPort: 80
