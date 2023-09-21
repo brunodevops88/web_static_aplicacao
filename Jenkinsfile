@@ -1,50 +1,31 @@
 pipeline {
-  agent any
-
-    environment {
-    registry = "brunosantos88/webfrontend"
-    registryCredential = 'dockerlogin'
-    PROJECT_ID = ('ProjectID')
-    CLUSTER_NAME = 'mycluster-dev1'
-    LOCATION = 'us-central1'
-    CREDENTIALS_ID = ('gcloud-creds')
-  }
-
-
-  stages{
-
-stage('GIT CLONE') {
-  steps {
-                // Get code from a GitHub repository
-    git url: 'https://github.com/BrunoSantos88/SITEWEB.git', branch: 'main',
-    credentialsId: 'jenkins-server_local'
-          }
-  }
-  
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your source code from your Git repository
+                checkout scm
+            }
         }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
+        
+        stage('Deploy to Google Cloud Storage') {
+            steps {
+                script {
+                    // Authenticate with Google Cloud using a service account key (JSON key file)
+                    withCredentials([file(credentialsId: 'your-google-cloud-key', variable: 'GCLOUD_KEY')]) {
+                        sh 'echo $GCLOUD_KEY > gcloud-key.json'
+                        sh 'gcloud auth activate-service-account --key-file=gcloud-key.json'
+                        
+                        // Set your Google Cloud project
+                        sh 'gcloud config set project devops-399217'
+                        
+                        // Deploy your static website to Google Cloud Storage
+                        sh 'gsutil -m rsync -r ./path/to/your/static/website gs://mybuket131646485/'
+                    }
+                }
+            }
         }
-      }
     }
-     
-stage('Deploying Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deployment.yaml")
-        }
-      }
-    }
-
-    }
-   }
+    
+}
