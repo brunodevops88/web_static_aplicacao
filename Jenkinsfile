@@ -1,45 +1,46 @@
 pipeline {
   agent any
-}
- 
+
     environment {
-    GCLOUD_CREDS=credentials('gcloud-creds')
-    PROJECT_ID=('ProjectID')
-    REGISTRY_REGION = 'us-central1'  // Substitua pela região desejada
-    IMAGE_NAME = 'Frontend'
-
+    registry = "brunosantos88/webfrontend"
+    registryCredential = 'dockerlogin'
   }
 
 
-stages{
+  stages{
 
-stage('GIT CLONE') {
-  steps {
-                // Get code from a GitHub repository
-    git url: 'https://github.com/BrunoSantos88/SITEWEB.git', branch: 'main',
-    credentialsId: 'jenkins-server_local'
-          }
-  }
-
+    stage('Clone repository') { 
+steps { 
+script{
+checkout scm
+}
+}
+}
   
-      stage('Build Docker Image') {
-            steps {
-                script {
-                    // Build the Docker image
-                    sh "docker build -t ${ARTIFACT_REGISTRY_IMAGE} ${DOCKERFILE_PATH}"
-                }
-            }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
-
-        stage('Push Docker Image to Artifact Registry') {
-            steps {
-                script {
-                    // Authenticate with Google Cloud
-                    sh "gcloud auth configure-docker ${REGISTRY_REGION}-docker.pkg.dev"
-
-                    // Push the Docker image to Artifact Registry
-                    sh "docker push ${ARTIFACT_REGISTRY_IMAGE}"
-                }
-            }
-        }
+      }
     }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+
+    stage('Kubernetes Deployment aplicação venda') {
+	   steps {
+	      withKubeConfig([credentialsId: 'kubelogin']) {
+		  sh ('kubectl apply -f deployment.yaml --namespace=devops')
+		}
+	      }
+   	}
+
+   }
+}
