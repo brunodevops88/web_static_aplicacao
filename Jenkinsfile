@@ -4,6 +4,10 @@ pipeline {
     environment {
     registry = "brunosantos88/webfrontend"
     registryCredential = 'dockerlogin'
+    PROJECT_ID = ('ProjectID')
+    CLUSTER_NAME = 'mycluster-dev1'
+    LOCATION = 'us-central1'
+    CREDENTIALS_ID = ('gcloud-creds')
   }
 
 
@@ -34,15 +38,12 @@ stage('GIT CLONE') {
       }
     }
      
-     
-     //kube#
-    stage('Kubernetes Deployment Frontend') {
-	   steps {
-	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl apply -f deployment.yaml --namespace=devops')
-		}
-	      }
-   	}
 
+    stage('Deploy to GKE') {
+            steps{
+                sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+            }
+        }
+    }
    }
-}
