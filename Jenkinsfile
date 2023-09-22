@@ -36,26 +36,26 @@ pipeline {
             }
         }
 
-        stage('TF Apply') {
+        stage('TF Destroy') {
             steps {
           sh '''
-          terraform apply -auto-approve
+          terraform destroy -auto-approve
           '''
 
             }
         }
 
 
-  stage('Deploy to S3') {
-            steps {
-                script {
-                    def bucketName = 'my-static-jenkinslastime'
-                    def sourceDir = './web'
+  ///stage('Deploy to S3') {
+          ///steps {
+             //   script {
+               //     def bucketName = 'my-static-jenkinslastime'
+             //       def sourceDir = './web'
                     
-                    // Use the AWS CLI to sync the files to S3
-                    sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
-                }
-            }
-        }
+               // Use the AWS CLI to sync the files to S3
+                //    sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
+            //    }
+        //    }
+     //   }
     }
     }
