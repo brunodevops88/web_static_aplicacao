@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     def bucketName = 'mybuckets3jenkins'
-                    def sourceDir = '*/web'
+                    def sourceDir = './web'
                     
                     // Use the AWS CLI to sync the files to S3
                     sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
