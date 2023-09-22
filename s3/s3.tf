@@ -5,10 +5,12 @@ resource "aws_s3_bucket" "my-static-website" {
   }
 }
 
-resource "aws_s3_bucket_website_configuration" "my-static-website" {
-  bucket = aws_s3_bucket.my-static-website.id
+  tags {
+    Name = "Website"
+    Environment = "production"
+  }
 
- cors_rule {
+  cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT","POST"]
     allowed_origins = ["*"]
@@ -33,14 +35,10 @@ resource "aws_s3_bucket_website_configuration" "my-static-website" {
 }
 EOF
 
-  index_document {
-    suffix = "index.html"
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
   }
-
-  error_document {
-    key = "index.html"
-  }
-}
 
 resource "aws_s3_bucket_versioning" "my-static-website" {
   bucket = aws_s3_bucket.my-static-website.id
