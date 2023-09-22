@@ -1,8 +1,8 @@
 pipeline {
   agent any
   
-  stages {
-    stage 'Install cluster'
+stages {
+  
  node('cluster Kubernetes azure'){
   sh 'sudo apt-get update'
   sh 'sudo cd SITEWEB'
