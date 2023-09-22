@@ -8,23 +8,6 @@ resource "aws_s3_bucket" "my-static-website" {
 resource "aws_s3_bucket_website_configuration" "my-static-website" {
   bucket = aws_s3_bucket.my-static-website.id
 
-    policy = <<EOF
-{
-  "Version": "2008-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadForGetBucketObjects",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "*"
-      },
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::my-static-jenkinslastime/*"
-    }
-  ]
-}
-EOF
-
   index_document {
     suffix = "index.html"
   }
