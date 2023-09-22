@@ -7,5 +7,3 @@ variable "region" {
 provider "aws" {
   region = var.region
 }
-
-variable "website_bucket_name" {}
