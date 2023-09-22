@@ -5,18 +5,8 @@ resource "aws_s3_bucket" "my-static-website" {
   }
 }
 
-  tags {
-    Name = "Website"
-    Environment = "production"
-  }
-
-  cors_rule {
-    allowed_headers = ["*"]
-    allowed_methods = ["PUT","POST"]
-    allowed_origins = ["*"]
-    expose_headers = ["ETag"]
-    max_age_seconds = 3000
-  }
+resource "aws_s3_bucket_website_configuration" "my-static-website" {
+  bucket = aws_s3_bucket.my-static-website.id
 
   policy = <<EOF
 {
@@ -29,16 +19,20 @@ resource "aws_s3_bucket" "my-static-website" {
         "AWS": "*"
       },
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${var.website_bucket_name}/*"
+      "Resource": "arn:aws:s3:::my-static-jenkinss34494497/*"
     }
   ]
 }
 EOF
 
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
+  index_document {
+    suffix = "index.html"
   }
+
+  error_document {
+    key = "index.html"
+  }
+}
 
 resource "aws_s3_bucket_versioning" "my-static-website" {
   bucket = aws_s3_bucket.my-static-website.id
