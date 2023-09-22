@@ -1,61 +1,15 @@
 pipeline {
   agent any
-  environment {
-    AWS_DEFAULT_REGION="us-east-1"
-    THE_BUTLER_SAYS_SO=credentials('aws-creds')
-  }
-
-  tools { 
-        ///depentencias 
-        terraform 'Terraform 1.3.7' 
-    }
   
   stages {
-    stage('Teste AWS') {
-      steps {
-        sh '''
-          aws --version
-          aws ec2 describe-instances
-        '''
-      }
-    }
+    stage 'Install cluster'
+ node('cluster Kubernetes azure'){
+  sh 'sudo apt-get update'
+  sh 'sudo cd SITEWEB'
+  sh 'sudo chmod 766 cluster.sh'
+  sh 'sudo ./cluster'
+}
 
-        ///INFRA iS CODE 
-    stage('TF INICIAR') {
-            steps {
-                sh '''
-                terraform init
-                '''
-            }
-        }
-
-        stage('TF FMT') {
-            steps {
-                sh 'terraform fmt '
-                
-            }
-        }
-
-        stage('TF Destroy') {
-            steps {
-          sh '''
-          terraform destroy -auto-approve
-          '''
-
-            }
-        }
-
-
-  ///stage('Deploy to S3') {
-          ///steps {
-             //   script {
-               //     def bucketName = 'my-static-jenkinslastime'
-             //       def sourceDir = './web'
-                    
-               // Use the AWS CLI to sync the files to S3
-                //    sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
-            //    }
-        //    }
-     //   }
+  
     }
     }
