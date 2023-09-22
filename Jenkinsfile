@@ -1,20 +1,19 @@
-
 pipeline {
-    agent any
-
-    environment {
-        AWS_ACCESS_KEY ('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_KEY ('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION = 'us-east-1'
+  agent any
+  environment {
+    AWS_DEFAULT_REGION="us-east-1"
+    THE_BUTLER_SAYS_SO=credentials('aws-creds')
+  }
+  
+  stages {
+    stage('Teste AWS') {
+      steps {
+        sh '''
+          aws --version
+          aws ec2 describe-instances
+        '''
+      }
     }
-    stages {
-
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                echo $AWS_SECRET_KEY
-                echo $AWS_ACCESS_KEY
-            }
 
         stage ('Build'){
             steps {
@@ -40,4 +39,3 @@ pipeline {
         }
     }
     }
-}
