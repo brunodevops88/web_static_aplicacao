@@ -1,5 +1,5 @@
 variable "region" {
-  default = "ap-south-1"
+  default = "us-east-1"
 }
 
 # aws provider block
@@ -7,3 +7,5 @@ variable "region" {
 provider "aws" {
   region = var.region
 }
+
+variable "website_bucket_name" {}

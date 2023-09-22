@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "website" {
-  bucket = "myjenkinsbucketlast"
+  bucket = "${var.website_bucket_name}"
   acl = "public-read"
 
   tags {
