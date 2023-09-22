@@ -15,21 +15,36 @@ pipeline {
       }
     }
 
-        stage ('Build'){
+        ///INFRA iS CODE 
+    stage('TF INICIAR') {
             steps {
-                echo "Building stage"
+                sh '''
+                terraform init
+                '''
             }
         }
-        stage ('Test'){
+
+        stage('TF FMT') {
             steps {
-                echo "Testing stage"
+                sh 'terraform fmt '
+                
+            }
+        }
+
+        stage('TF Apply') {
+            steps {
+          sh '''
+          terraform apply -auto-approve
+          '''
 
             }
         }
+
+
   stage('Deploy to S3') {
             steps {
                 script {
-                    def bucketName = 'mybuckets3jenkins'
+                    def bucketName = 'my-static-jenkinss34494498'
                     def sourceDir = './web'
                     
                     // Use the AWS CLI to sync the files to S3
