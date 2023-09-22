@@ -4,6 +4,11 @@ pipeline {
     AWS_DEFAULT_REGION="us-east-1"
     THE_BUTLER_SAYS_SO=credentials('aws-creds')
   }
+
+  tools { 
+        ///depentencias 
+        terraform 'Terraform 1.3.7' 
+    }
   
   stages {
     stage('Teste AWS') {
