@@ -49,7 +49,7 @@ pipeline {
   stage('Deploy to S3') {
             steps {
                 script {
-                    def bucketName = 'my-static-jenkinss34494497'
+                    def bucketName = 'my-static-jenkinss3449449755'
                     def sourceDir = './web'
                     
                     // Use the AWS CLI to sync the files to S3
