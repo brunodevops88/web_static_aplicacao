@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials('CredentialID')
-        AWS_SECRET_ACCESS_KEY = credentials('SecretAccessKey')
-        AWS_DEFAULT_REGION = 'us-east-1'
+        AWS_ACCESS_KEY     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
 
 
     }
@@ -32,4 +32,3 @@ pipeline {
             }
         }
     }
-}
