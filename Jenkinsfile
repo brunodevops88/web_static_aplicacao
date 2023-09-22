@@ -6,8 +6,12 @@ pipeline {
         AWS_SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
 
-
     }
+
+    // Stages.
+  stages {   
+
+
     stages {
         stage ('Build'){
             steps {
@@ -32,3 +36,4 @@ pipeline {
             }
         }
     }
+  }
