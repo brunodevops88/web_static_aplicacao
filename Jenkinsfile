@@ -3,13 +3,19 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_ACCESS_KEY ('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_KEY ('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = 'us-east-1'
-
-
     }
     stages {
+
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+                echo $AWS_SECRET_KEY
+                echo $AWS_ACCESS_KEY
+            }
+
         stage ('Build'){
             steps {
                 echo "Building stage"
@@ -32,5 +38,6 @@ pipeline {
                 }
             }
         }
+    }
     }
 }
