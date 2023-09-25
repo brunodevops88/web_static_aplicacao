@@ -10,14 +10,12 @@ pipeline {
         ///depentencias 
         terraform 'Terraform 1.3.7' 
         maven 'Maven_3_5_2'  
-        SNYK_HOME = tool name: 'Snyk'
     }
-
-    }
+}
   
-  stages {
+stages {
 
-  stage('GIT CLONE') {
+stage('GIT CLONE') {
   steps {
                 // Get code from a GitHub repository
     git url: 'https://github.com/BrunoSantos88/SITEWEB.git', branch: 'main',
@@ -86,4 +84,4 @@ stage('Deploy to S3') {
                     sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
                }
             }
-       }
+}
