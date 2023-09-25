@@ -21,8 +21,6 @@ pipeline {
           }
   }
 
-
-    stages{
     stage('SonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=SITEWEB -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login='('sonarkey')
@@ -75,7 +73,7 @@ pipeline {
 stage('Deploy to S3') {
         steps {
                script {
-                   def bucketName = 'my-static-jenkinslastime'
+                   def bucketName = 'my-static-website-frontendv1'
                   def sourceDir = './web'
                     
               ///Use the AWS CLI to sync the files to S3
