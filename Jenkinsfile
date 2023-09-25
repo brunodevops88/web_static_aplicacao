@@ -22,11 +22,6 @@ stage('GIT CLONE') {
           }
   }
 
-    stage('Install NodeJs') {
-            steps {
-                sh 'npm install'
-            }
-        }
 
     stage('SonarAnalysis') {
             steps {	
