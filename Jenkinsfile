@@ -11,7 +11,6 @@ pipeline {
         terraform 'Terraform 1.3.7' 
         maven 'Maven_3_5_2'  
     }
-}
   
 stages {
 
@@ -84,4 +83,5 @@ stage('Deploy to S3') {
                     sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
                }
             }
+}
 }
