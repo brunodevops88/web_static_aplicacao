@@ -9,7 +9,7 @@ pipeline {
         ///depentencias 
         terraform 'Terraform 1.3.7' 
         maven 'Maven_3_5_2'  
-        nodejs 'Nodejs_18.0.0'
+        nodejs "nodejs_8.10.0"
     }
   
 stages {
