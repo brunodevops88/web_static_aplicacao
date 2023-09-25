@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "my-static-website" {
   bucket = "my-static-jenkinslastime" # give a unique bucket name
   tags = {
-    Name = "my-static-website-frontendv1"
+    Name = "my-static-website-frontend"
   }
 }
 
