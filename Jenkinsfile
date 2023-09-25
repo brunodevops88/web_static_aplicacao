@@ -3,12 +3,16 @@ pipeline {
   environment {
     AWS_DEFAULT_REGION="us-east-1"
     THE_BUTLER_SAYS_SO=credentials('aws-creds')
+    SNYK_API_TOKEN = credentials('snyk-api-token')
   }
 
   tools { 
         ///depentencias 
         terraform 'Terraform 1.3.7' 
         maven 'Maven_3_5_2'  
+        SNYK_HOME = tool name: 'Snyk'
+    }
+
     }
   
   stages {
@@ -21,18 +25,22 @@ pipeline {
           }
   }
 
+  stage('BUILD'){
+        sh 'npm install' // Dependency Installation stage
+    }
+
     stage('SonarAnalysis') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=SITEWEB -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login='('sonarkey')
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=SITEWEB -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=e21cbff0bf1b8610f6e2b2d9b07f89a9d829c4bb'
 			}
         } 
 
-    stage('RunSCAAnalysisUsingSnyk') {
-            steps {		
-				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
-			}
+    stage('Scan') {
+        snykSecurity organisation: 'BrunoSantos88', projectName: 'SITEWEB', severity: 'medium', snykInstallation: 'Snyk', snykTokenId: '5eb9608a-586d-4198-b5e6-70a76a352200', targetFile: 'package.json'
+    }
+    }
+
+    // InfraIsCode
 
     stage('Teste AWS') {
       steps {
@@ -43,7 +51,6 @@ pipeline {
       }
     }
 
-        ///INFRA iS CODE 
     stage('TF INICIAR') {
             steps {
                 sh '''
@@ -80,6 +87,3 @@ stage('Deploy to S3') {
                }
             }
        }
-    }
-    }
-}
