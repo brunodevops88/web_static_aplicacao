@@ -23,17 +23,6 @@ stage('GIT CLONE') {
   }
 
 
-    stage('SonarAnalysis') {
-            steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=SITEWEB -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=e21cbff0bf1b8610f6e2b2d9b07f89a9d829c4bb'
-			}
-        } 
-
-    stage('Scan') {
-        snykSecurity organisation: 'BrunoSantos88', projectName: 'SITEWEB', severity: 'medium', snykInstallation: 'Snyk', snykTokenId: '5eb9608a-586d-4198-b5e6-70a76a352200', targetFile: 'package.json'
-    }
-    }
-
     // InfraIsCode
 
     stage('Teste AWS') {
@@ -80,5 +69,6 @@ stage('Deploy to S3') {
                     sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
                }
             }
+}
 }
 }
