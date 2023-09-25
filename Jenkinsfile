@@ -24,7 +24,7 @@ stage('GIT CLONE') {
 
     // InfraIsCode
 
-    stage('Teste AWS') {
+    stage('Autentication AWS') {
       steps {
         sh '''
           aws --version
@@ -33,7 +33,7 @@ stage('GIT CLONE') {
       }
     }
 
-    stage('TF INICIAR') {
+    stage('Terraform Iniciar') {
             steps {
                 sh '''
                 terraform init
@@ -41,14 +41,14 @@ stage('GIT CLONE') {
             }
         }
 
-        stage('TF FMT') {
+        stage('Terraform Formatar') {
             steps {
                 sh 'terraform fmt '
                 
             }
         }
 
-        stage('TF Apply') {
+        stage('Terraform Aplicar') {
             steps {
           sh '''
           terraform apply -auto-approve
@@ -58,7 +58,7 @@ stage('GIT CLONE') {
         }
 
 
-stage('Deploy to S3') {
+stage('Deploy Bucket S3 Frontend') {
         steps {
                script {
                    def bucketName = 'my-static-jenkinslastime'
