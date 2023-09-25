@@ -22,10 +22,16 @@ stage('GIT CLONE') {
           }
   }
 
+    stage('Install NodeJs') {
+            steps {
+                sh 'npm install'
+                sh 'npm install -g sonarqube-scanner'
+            }
+        }
 
     stage('SonarAnalysis') {
             steps {	
-		sh 'mvn clean verify sonar-scanner Dsonar.organization=brunosantos881388 -Dsonar.projectKey=SITEWEB -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=e21cbff0bf1b8610f6e2b2d9b07f89a9d829c4bb'
+		sh 'sonar-scanner Dsonar.projectKey=brunosantos881388 -Dsonar.organization=BrunoSantos88_SITEWEB -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=e21cbff0bf1b8610f6e2b2d9b07f89a9d829c4bb'
 			}
     }
 
