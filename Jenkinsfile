@@ -9,6 +9,7 @@ pipeline {
         ///depentencias 
         terraform 'Terraform 1.3.7' 
         maven 'Maven_3_5_2'  
+        nodejs 'Nodejs 18.0.0'
     }
   
 stages {
@@ -21,7 +22,14 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('RunSCAAnalysisUsingSnyk') {
+    stage('Install NodeJs') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+
+  stage('Analyse Security Snyk') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:test -fn'
