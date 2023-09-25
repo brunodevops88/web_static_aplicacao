@@ -3,7 +3,6 @@ pipeline {
   environment {
     AWS_DEFAULT_REGION="us-east-1"
     THE_BUTLER_SAYS_SO=credentials('aws-creds')
-    SNYK_API_TOKEN = credentials('snyk-api-token')
   }
 
   tools { 
