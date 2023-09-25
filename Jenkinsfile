@@ -22,9 +22,6 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('BUILD'){
-        sh 'npm install' // Dependency Installation stage
-    }
 
     stage('SonarAnalysis') {
             steps {	
