@@ -31,8 +31,7 @@ stage('GIT CLONE') {
   stage('Analyse Security Snyk') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'npm install -g snyk'
-          sh 'snyk test'
+					sh 'mvn snyk:test -fn'
 				}
 			}
     }		
