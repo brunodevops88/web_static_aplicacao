@@ -1,5 +1,6 @@
 {
-    "name": "Frontend",
+    "name": "SITEWEB"
+,
     "version": "1.0.0",
     "description": "Descrição do seu projeto",
     "main": "index.js", // Arquivo JavaScript principal do seu projeto
@@ -11,7 +12,7 @@
       "node",
       "javascript"
     ],
-    "author": "Frontend",
+    "author": "SITEWEB",
     "license": "MIT", // Licença do seu projeto
     "dependencies": {
       // Dependências do seu projeto, por exemplo:
