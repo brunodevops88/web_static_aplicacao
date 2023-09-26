@@ -28,14 +28,6 @@ stage('GIT CLONE') {
 			}
     }
 
-    stage('Node Build') {
-            steps {
-                // Install npm dependencies and build your project
-                sh 'npm install'
-        }
-    }
-
-
   stage('Analyse Security Snyk') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
