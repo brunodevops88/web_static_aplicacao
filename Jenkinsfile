@@ -24,14 +24,15 @@ stage('GIT CLONE') {
 
     stage('SonarAnalysis') {
             steps {	
-		sh 'npm install --save-dev  sonarqube-scanner -Dsonar.projectKey=brunosantos881388 -Dsonar.organization=SITEWEB -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=e21cbff0bf1b8610f6e2b2d9b07f89a9d829c4bb'
+		sh 'npm install sonar-scanner -Dsonar.projectKey=brunosantos881388 -Dsonar.organization=SITEWEB -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=e21cbff0bf1b8610f6e2b2d9b07f89a9d829c4bb'
 			}
     }
 
   stage('Analyse Security Snyk') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
+					sh 'npm install -g snyk'
+          sh 'snyk test'
 				}
 			}
     }		
