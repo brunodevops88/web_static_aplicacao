@@ -27,6 +27,7 @@ stage('GIT CLONE') {
                 sh 'npm install'
                 sh 'npm run build'
         }
+    }
 
     stage('SonarAnalysis') {
             steps {	
@@ -90,7 +91,6 @@ stage('Deploy Bucket S3 Frontend') {
                     sh "aws s3 sync ${sourceDir} s3://${bucketName}/"
                }
             }
-}
 }
 }
 }
