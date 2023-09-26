@@ -33,6 +33,7 @@ stage('GIT CLONE') {
                 // Install npm dependencies and build your project
                 sh 'npm install'
         }
+    }
 
 
   stage('Analyse Security Snyk') {
