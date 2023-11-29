@@ -1,6 +1,4 @@
 FROM amazonlinux:2
-RUN yum install git -y
-RUN yum install -y apache-maven
 
 #aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
@@ -20,9 +18,3 @@ RUN curl --silent --location "https://github.com/weaveworks/eksctl/releases/late
 RUN mv /tmp/eksctl /usr/local/bin
 RUN export PATH=$PATH:/usr/local/bin
 RUN echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
-
-# Install docker amazon linux2
-RUN yum update -y 
-RUN amazon-linux-extras install docker 
-RUN yum install docker
-
