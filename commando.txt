@@ -1,0 +1,4 @@
+# commandos docker
+
+- docker logs jenkins 2>&1 | grep
+
