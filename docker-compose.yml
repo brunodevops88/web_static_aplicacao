@@ -14,6 +14,7 @@ services:
       - "8080:8080"
     volumes:
       - jenkins_data:/var/jenkins_home
+    network_mode: "host"
 
   prometheus:
     image: prom/prometheus
@@ -57,3 +58,4 @@ services:
 
 volumes:
   grafana-data:
+  jenkins_data:
