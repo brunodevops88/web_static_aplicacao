@@ -9,7 +9,7 @@ services:
   #    - "80:80"
 
   jenkins:
-    image: brunosantos88/jenkinserver:31
+    image: jenkins/jenkins:lts
     ports:
       - "8080:8080"
       - "5000:5000"
