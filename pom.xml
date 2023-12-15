@@ -6,7 +6,7 @@
 
     <!-- Essential project information -->
     <groupId>com.example</groupId>
-    <artifactId>my-project</artifactId>
+    <artifactId>cloudsonarsca</artifactId>
     <version>1.0.0</version>
 
     <!-- Other project configurations and properties go here -->
