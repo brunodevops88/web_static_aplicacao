@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: my-app-artifact
-        path: web  # Replace 'dist' with the directory where your build artifacts are located
+        path: . web
         
     - name: SonarCloud Scan
       run: sonar-scanner
