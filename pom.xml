@@ -4,18 +4,16 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>cloudsonarscan_brunosantos</artifactId>
+    <artifactId>web-project</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>cloudsonarscan_brunosantos</name>
+    <name>Web Project</name>
     <description>A sample web project with HTML, CSS, and Java</description>
 
     <properties>
         <!-- Define propriedades personalizadas -->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.organization>cloudsonarscan</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
