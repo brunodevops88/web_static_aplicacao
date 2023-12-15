@@ -21,15 +21,15 @@ jobs:
     - name: Build project
       run: |
         # Your build commands here
-        run: npm install
+        npm install
         npm run build
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: my-app-artifact
-        path: web
-
+        path: web  # Replace 'dist' with the directory where your build artifacts are located
+        
     - name: SonarCloud Scan
       run: sonar-scanner
       env:
