@@ -13,26 +13,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
+  steps:
+    - name: Verificar o repositório
+      uses: actions/checkout@v2
 
-    - name: Build project
+    - name: Iterar sobre Pastas e Imprimir o Nome
       run: |
-        # Your build commands here
-        npm install
-        npm run build
-
-    - name: Implantar no GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        publish_dir: web *
-        
-    - name: SonarCloud Scan
-      run: sonar-scanner
-      env:
-        SONAR_TOKEN: d73e9b5f8867cd2a28bc97308fdd03a91e2514e5
-        SONAR_PROJECT_KEY: cloudsonarscan_brunosantos
-        SONAR_ORGANIZATION: cloudsonarscan
-    
+        for folder in */; do
+          echo "Nome da pasta: $folder"
+          # Adicione ações específicas para cada pasta aqui
+        done
