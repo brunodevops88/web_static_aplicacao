@@ -13,16 +13,28 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Node JS
-        uses: actions/setup-java@v3
+
+      # NODEJS 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node_verison: 10
+         node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+        # MAVEN
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      # SONARCLOUD
       - name: Build and analyze
         env:
           SONAR_TOKEN: d73e9b5f8867cd2a28bc97308fdd03a91e2514e5
