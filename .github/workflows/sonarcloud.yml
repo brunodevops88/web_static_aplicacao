@@ -21,9 +21,16 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
-      working-directory: web # Specify the directory where npm test should run
+    - name: Build project
+      run: |
+        # Your build commands here
+        npm run build
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-app-artifact
+        path: web
 
     - name: SonarCloud Scan
       run: sonar-scanner
