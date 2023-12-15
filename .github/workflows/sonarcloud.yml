@@ -42,12 +42,12 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: my-app-artifact
-        path: .
+        path: web/ * *
 
     - name: Deploy to production
       run: |
         # Your deployment commands here
-        cp -R my-app-artifact/* /web/*
+        cp -R my-app-artifact/* *  web/ *
         
     - name: SonarCloud Scan
       run: sonar-scanner
