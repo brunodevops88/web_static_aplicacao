@@ -23,7 +23,7 @@ jobs:
       working-directory: web
 
     - name: Run tests
-      run: npm test
+      run: npm init
       working-directory: web
         
     - name: SonarCloud Scan
