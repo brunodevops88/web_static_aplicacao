@@ -37,6 +37,17 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         publish_dir: web/*
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-app-artifact
+        path: web/
+
+    - name: Deploy to production
+      run: |
+        # Your deployment commands here
+        cp -R my-app-artifact/* /web/*
         
     - name: SonarCloud Scan
       run: sonar-scanner
