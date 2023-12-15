@@ -1,14 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <!-- other project information -->
+<properties>
+  <sonar.organization>cloudsonarscan</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+<build>
+    <plugins>
+        <!-- Other plugins -->
 
-    <properties>
-        <!-- Other properties -->
-        <sonar.organization>cloudsonarscan</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    </properties>
-
-    <!-- other configuration sections like dependencies, build, etc. -->
-
-</project>
+        <!-- SonarScanner Plugin -->
+        <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.9.0.2155</version>
+        </plugin>
+    </plugins>
+</build>
+</properties>
