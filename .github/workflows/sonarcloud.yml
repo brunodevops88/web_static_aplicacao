@@ -24,11 +24,11 @@ jobs:
         npm install
         npm run build
 
-    - name: Archive artifacts
-      uses: actions/upload-artifact@v2
+    - name: Implantar no GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        name: my-app-artifact
         publish_dir: web
+        github_token: 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
         
     - name: SonarCloud Scan
       run: sonar-scanner
