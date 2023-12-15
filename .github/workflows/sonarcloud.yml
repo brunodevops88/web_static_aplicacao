@@ -1,41 +1,33 @@
-name: SonarCloud
+name: Node.js CI with SonarCloud
+
 on:
   push:
     branches:
       - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+
 jobs:
   build:
-    name: Build and analyze
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      # NODEJS 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-         node-version: '14'
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Run tests
-        run: npm test
+    - name: Run tests
+      run: npm test
 
-        # MAVEN
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      # SONARCLOUD
-      - name: Build and analyze
-        env:
-          SONAR_TOKEN: d73e9b5f8867cd2a28bc97308fdd03a91e2514e5
-        run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=cloudsonarscan_brunosantos
+    - name: SonarCloud Scan
+      run: sonar-scanner
+      env:
+        SONAR_TOKEN: d73e9b5f8867cd2a28bc97308fdd03a91e2514e5
+        SONAR_PROJECT_KEY: cloudsonarscan_brunosantos
+        SONAR_ORGANIZATION: cloudsonarscan
+    
