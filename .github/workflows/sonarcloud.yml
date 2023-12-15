@@ -32,5 +32,5 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: d73e9b5f8867cd2a28bc97308fdd03a91e2514e5
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=cloudsonarscan_brunosantos
