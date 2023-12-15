@@ -1,4 +1,4 @@
-name: Iterar sobre Pastas
+name: SonarCloud
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
     - name: Implantar no GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        publish_dir: web/
+        publish_dir: web/*
         
     - name: SonarCloud Scan
       run: sonar-scanner
