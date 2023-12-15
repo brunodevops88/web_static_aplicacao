@@ -13,13 +13,10 @@ jobs:
     - name: Verificar o repositório
       uses: actions/checkout@v2
 
-    - name: Iterar sobre Pastas e Imprimir o Nome
-      run: |
-        for folder in */; do
-          echo "Nome da pasta: $folder"
-          # Adicione ações específicas para cada pasta aqui
-        done
-
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+       path: web
 
    # Build
     - name: Setup Node.js
@@ -33,21 +30,10 @@ jobs:
         npm install
         npm run build
 
-    - name: Implantar no GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        publish_dir: .
-
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: my-app-artifact
-        path: web/ * *
-
-    - name: Deploy to production
-      run: |
-        # Your deployment commands here
-        cp -R my-app-artifact/* *  web/ *
+       path: web
         
     - name: SonarCloud Scan
       run: sonar-scanner
