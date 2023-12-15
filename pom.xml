@@ -1,4 +1,4 @@
 <properties>
-  <sonar.organization>brunosantos881388</sonar.organization>
+  <sonar.organization>cloudsonarscan</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 </properties>
