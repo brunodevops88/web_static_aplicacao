@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: my-app-artifact
-        path: . web
+        publish_dir: web
         
     - name: SonarCloud Scan
       run: sonar-scanner
