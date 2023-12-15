@@ -13,11 +13,6 @@ jobs:
     - name: Verificar o repositório
       uses: actions/checkout@v2
 
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-       path: web
-
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
@@ -25,11 +20,11 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: /home/runner/work/web_static_aplicacao/web
+      working-directory: web_static_aplicacao/web
 
     - name: Run tests
       run: npm test
-      working-directory: /home/runner/work/web_static_aplicacao/web
+      working-directory: web_static_aplicacao/web
         
     - name: SonarCloud Scan
       run: sonar-scanner
