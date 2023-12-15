@@ -23,6 +23,7 @@ jobs:
 
     - name: Run tests
       run: npm test
+      working-directory: web # Specify the directory where npm test should run
 
     - name: SonarCloud Scan
       run: sonar-scanner
