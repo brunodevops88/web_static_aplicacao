@@ -20,11 +20,11 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: web_static_aplicacao/web
+      working-directory: /home/runner/work/web_static_aplicacao/web
 
     - name: Run tests
       run: npm test
-      working-directory: web_static_aplicacao/web
+      working-directory: /home/runner/work/web_static_aplicacao/web
         
     - name: SonarCloud Scan
       run: sonar-scanner
