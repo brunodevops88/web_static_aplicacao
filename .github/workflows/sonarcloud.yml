@@ -29,6 +29,6 @@ jobs:
     - name: SonarCloud Scan
       run: sonar-scanner
       env:
-        SONAR_TOKEN: d73e9b5f8867cd2a28bc97308fdd03a91e2514e5
+        SONAR_TOKEN: 
         SONAR_PROJECT_KEY: cloudsonarscan_brunosantos
         SONAR_ORGANIZATION: cloudsonarscan
