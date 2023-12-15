@@ -7,7 +7,7 @@
     <artifactId>web-project</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>My Web Project</name>
+    <name>CloudSonarScan</name>
     <description>A sample web project with HTML, CSS, and Java</description>
 
     <properties>
